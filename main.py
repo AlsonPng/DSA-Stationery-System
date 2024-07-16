@@ -29,8 +29,23 @@ def viewMenu():
         prodList = []
         connection = sqlite3.connect('product.db')
         c = connection.cursor()
-        c.execute("DELETE FROM products")
-        # c.execute("SELECT * from products")
+        # c.execute("DELETE FROM products")
+        c.execute("SELECT * from products")
+
+        """ Initialise database table """
+        # try:
+        #     c.execute('''CREATE TABLE IF NOT EXISTS products (
+        #                         id TEXT PRIMARY KEY,
+        #                         name TEXT,
+        #                         category TEXT,
+        #                         brand TEXT,
+        #                         supplier_since DATE
+        #                     )''')
+        # except sqlite3.OperationalError as e:
+        #     print("Error creating table:", e)
+        # else:
+        #     print("Table 'products' created successfully.")
+
         products = c.fetchall()
         prodList = products
         connection.commit()
