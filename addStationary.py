@@ -71,17 +71,28 @@ def addStationary(prodList):
                     supplier_since = year
                     break  # Exit the loop after successful validation and assignment
 
+        while True:
+            stock = input("Enter supplier since year ____: ")
+            stock_temp = stock.replace(" ", "")
+            if not stock_temp.strip():
+                print("Supplier since year cannot be empty. Please try again.")
+            elif not stock_temp.isnumeric():
+                print("Supplier since year can only contain numbers. Please try again.")
+            else:
+                break
+
         
-        stationary = Stationary(inputId, name, category, brand, supplier_since)
+        stationary = Stationary(inputId, name, category, brand, supplier_since, stock)
         connection = sqlite3.connect('product.db')
         c = connection.cursor()
-        sql = "INSERT INTO products VALUES (?, ?, ?, ?, ?)"
+        sql = "INSERT INTO products VALUES (?, ?, ?, ?, ?, ?)"
         id = stationary.getId()
         name = stationary.getName()
         category = stationary.getCategory()
         brand = stationary.getBrand()
         supplier_since = stationary.getSupplierSince()
-        c.execute(sql, (id, name, category, brand, supplier_since))
+        stock = stationary.getStock()
+        c.execute(sql, (id, name, category, brand, supplier_since, stock))
         # c.execute("SELECT * from products")
         # products = c.fetchall()
         # prodList = []

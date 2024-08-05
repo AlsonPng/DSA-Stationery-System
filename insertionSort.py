@@ -26,7 +26,7 @@ def insertionSort(prodList):
     connection = sqlite3.connect('product.db')
     c = connection.cursor()
     c.execute("DELETE FROM products")
-    insert = "INSERT INTO products VALUES (?, ?, ?, ?, ?)"
+    insert = "INSERT INTO products VALUES (?, ?, ?, ?, ?, ?)"
     for i in prodList:
         c.execute(insert, i)
     connection.commit()

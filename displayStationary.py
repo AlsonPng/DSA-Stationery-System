@@ -17,12 +17,13 @@ def displayStationary():
         print("---------------------------------------------------------------------------")
         print("products List: ")
         for row in products:
-            id, name, category, brand, supplier_since = row
+            id, name, category, brand, supplier_since, stock = row
             print(f"Product ID: {id}")
             print(f"Product Name: {name}")
             print(f"Product Category: {category}")
             print(f"Brand: {brand}")
             print(f"Supplier Year: {supplier_since}")
+            print(f"Stock: {stock}")
             print("---------------------------------------------------------------------------")
             count += 1
     
