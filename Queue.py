@@ -1,3 +1,7 @@
+# Name: Alson Png
+# Student Admin no.: 231664Q
+# Tutorial Group: 5
+
 from RestockDetail import RestockDetail
 
 class RestockingQ:

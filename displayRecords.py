@@ -1,3 +1,7 @@
+# Name: Alson Png
+# Student Admin no.: 231664Q
+# Tutorial Group: 5
+
 import sqlite3
 
 def getRecordsPerRow():

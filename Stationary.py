@@ -2,8 +2,6 @@
 # Student Admin no.: 231664Q
 # Tutorial Group: 5
 
-
-
 class Stationary:
     def __init__(self, id, name, category, brand, supplier_since, stock):
         self.__id = id
