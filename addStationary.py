@@ -16,7 +16,7 @@ def addStationary(prodList):
                 c.execute("SELECT * FROM products")
                 products = c.fetchall()
                 for row in products:
-                    id, name, category, brand, supplier_since = row
+                    id, name, category, brand, supplier_since, stock = row
                     if id.lower() == inputId.lower():
                         print("Product ID must be unique. Please try again. ")
                         is_unique = False 
@@ -72,12 +72,12 @@ def addStationary(prodList):
                     break  # Exit the loop after successful validation and assignment
 
         while True:
-            stock = input("Enter supplier since year ____: ")
+            stock = input("Stock quantity: ")
             stock_temp = stock.replace(" ", "")
             if not stock_temp.strip():
-                print("Supplier since year cannot be empty. Please try again.")
+                print("Stock quantity cannot be empty. Please try again.")
             elif not stock_temp.isnumeric():
-                print("Supplier since year can only contain numbers. Please try again.")
+                print("Stock quantity can only contain numbers. Please try again.")
             else:
                 break
 

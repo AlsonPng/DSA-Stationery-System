@@ -11,10 +11,11 @@ def restocking(restockingQ):
     existing_product_ids = {row[0] for row in c.fetchall()}
 
     while True:
-        prod_id = input("Enter a valid existing product ID: ")
+        prod_id = input("Enter product id: ")
         if prod_id in existing_product_ids:
             quantity = int(input("Enter the quantity to restock: "))
             restockingQ.enqueue(RestockDetail(prod_id, quantity))
+            print("Resistocking arrival queued successfully!")
             break
         else:
             print("Invalid product ID. Please try again.")
@@ -36,7 +37,7 @@ def restockingMenu(restockingQ):
             case "1":
                 restocking(restockingQ=restockingQ)
             case "2":
-                print("Number of stock arrival:", restockingQ.__len__())
+                print("Number of restocking in queue:", restockingQ.__len__())
             case "3":
                 handleNextDelivery(restockingQ)
             case "0":

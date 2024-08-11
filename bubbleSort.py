@@ -2,9 +2,9 @@
 # Student Admin no.: 231664Q
 # Tutorial Group: 5
 
-from displayStationary import displayStationary
+from displayRecords import displayRecords
 import sqlite3
-def bubbleSort(prodList):
+def bubbleSort(prodList, records_per_row):
     if prodList == []:
         print("\N{Face Screaming in Fear} There are currently no products in the system!\n")
         return prodList
@@ -33,6 +33,6 @@ def bubbleSort(prodList):
     connection.close()
     display = input("Do you want to display the sorted list (Y/N)? ").lower()
     if display == "y":
-        displayStationary()
+        displayRecords(records_per_row)
     else:
         print()

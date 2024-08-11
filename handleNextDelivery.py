@@ -9,17 +9,17 @@ def handleNextDelivery(queue):
     print(f"Next Delivery: Prod_id = {next_delivery.prod_id}, Quantity = {next_delivery.quantity}")
 
     # Ask the staff if they want to accept the delivery
-    accept = input("Do you want to accept this delivery? (yes/no): ").strip().lower()
+    accept = input("Proceed with restocking (Y/N): ").strip().lower()
 
-    if accept == 'yes':
+    if accept == 'y':
         # Update the stock quantity in the database
         conn = sqlite3.connect('product.db')
         c = conn.cursor()
         c.execute('UPDATE products SET stock = stock + ? WHERE id = ?', (next_delivery.quantity, next_delivery.prod_id))
+        stock = c.execute('SELECT stock FROM products WHERE id = ?', (next_delivery.prod_id,)).fetchone()[0]
+        print(f"Product {next_delivery.prod_id} updated stock: {int(stock)}")
         conn.commit()
         conn.close()
-
-        print("Delivery accepted and stock updated.")
     else:
         # Enqueue the delivery back into the queue
         queue.enqueue(next_delivery)

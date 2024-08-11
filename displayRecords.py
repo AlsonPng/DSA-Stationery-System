@@ -22,6 +22,8 @@ def displayRecords(records_per_row, index=0):
     
     if count_result[0] == 0:
         print("\N{Face Screaming in Fear} There are currently no products in the system!\n")
+
+    #
     elif index < len(products):
         # Fetch the current row of products to display
         row_products = products[index:index + records_per_row]
@@ -29,14 +31,14 @@ def displayRecords(records_per_row, index=0):
         # Format each product in the row
         formatted_products = []
         for product in row_products:
-            total_gap = 50
+            col_width = 50
             id, name, category, brand, supplier_since, stock = product
-            id_gap = " " * (total_gap - len(id) - 9)
-            name_gap = " " * (total_gap - len(name) - 11)
-            category_gap = " " * (total_gap - len(category) - 10)
-            brand_gap = " " * (total_gap - len(brand) - 7)
-            supplier_since_gap = " " * (total_gap - len(str(supplier_since)) - 16)
-            stock_gap = " " * (total_gap - len(stock) - 8)
+            id_gap = " " * (col_width - len(id) - 9)
+            name_gap = " " * (col_width - len(name) - 11)
+            category_gap = " " * (col_width - len(category) - 10)
+            brand_gap = " " * (col_width - len(brand) - 7)
+            supplier_since_gap = " " * (col_width - len(str(supplier_since)) - 16)
+            stock_gap = " " * (col_width - len(stock) - 8)
 
             formatted_product = (
                 f"Prod id: {id}{id_gap}\n"

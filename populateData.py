@@ -26,7 +26,7 @@ def populateData(prodList):
     newStud = (newStudA.getId(), newStudA.getName(), newStudA.getCategory(), newStudA.getBrand(), newStudA.getSupplierSince(), newStudA.getStock())
     prodList.append(newStud)
     tempList.append(newStud)
-    newStudA = Stationary.Stationary("PD1001", "Copier Paper (A4) 70GSM", "Paper", "PaperOne", 2021, 1000)
+    newStudA = Stationary.Stationary("PD1001", "Copier Paper (A4) 70GSM", "Paper", "PaperOne", 2021, 1500)
     newStud = (newStudA.getId(), newStudA.getName(), newStudA.getCategory(), newStudA.getBrand(), newStudA.getSupplierSince(), newStudA.getStock())
     prodList.append(newStud)
     tempList.append(newStud)

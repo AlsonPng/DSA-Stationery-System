@@ -18,13 +18,33 @@ from Queue import RestockingQ as Queue
 
 global restockingQ 
 restockingQ = Queue()
+global records_per_row
+records_per_row = 1
 
+def initializeDatabase():
+    connection = sqlite3.connect('product.db')
+    c = connection.cursor()
+    try:
+        c.execute('''CREATE TABLE IF NOT EXISTS products (
+                            id TEXT PRIMARY KEY,
+                            name TEXT,
+                            category TEXT,
+                            brand TEXT,
+                            supplier_since DATE,
+                            stock TEXT
+                        )''')
+    except sqlite3.OperationalError as e:
+        print("Error creating table:", e)
+    connection.commit()
+    connection.close()
 
 def main():
+    initializeDatabase()
     print(Fore.LIGHTBLUE_EX, figlet_format("Stationary Management System", font = "speed"), Fore.WHITE)
     viewMenu()
 
 def viewMenu():
+    global records_per_row
     print("1. Add a new Stationary. ")
     print("2. Display all Stationary. ")
     print("3. Sort Stationary via Bubble sort on Category. ")
@@ -35,7 +55,7 @@ def viewMenu():
     print("8. Set number of records per row to display ") 
     print("9. Populate data. ")
     print("0. Exit program. ")
-    menuChoice = input(f"Please select one {Fore.MAGENTA}(1,2,3,4,9 or 0){Fore.WHITE}: ")
+    menuChoice = input(f"Please select one {Fore.MAGENTA}(1,2,3,4,5,6,7,8,9 or 0){Fore.WHITE}: ")
     running = True
 
     while running:
@@ -43,22 +63,7 @@ def viewMenu():
         connection = sqlite3.connect('product.db')
         c = connection.cursor()
         # c.execute("DELETE FROM products")
-        # c.execute("SELECT * from products")
-
-        """ Initialise database table """
-        # try:
-        #     c.execute('''CREATE TABLE IF NOT EXISTS products (
-        #                         id TEXT PRIMARY KEY,
-        #                         name TEXT,
-        #                         category TEXT,
-        #                         brand TEXT,
-        #                         supplier_since DATE,
-        #                         stock TEXT
-        #                     )''')
-        # except sqlite3.OperationalError as e:
-        #     print("Error creating table:", e)
-        # else:
-        #     print("Table 'products' created successfully.")
+        c.execute("SELECT * from products")
 
         products = c.fetchall()
         prodList = products
@@ -69,19 +74,19 @@ def viewMenu():
                 addStationary(prodList)
                 return(viewMenu())
             case "2":
-                displayStationary()
+                displayRecords(records_per_row)
                 return (viewMenu())
             case "3":
-                bubbleSort(prodList)
+                bubbleSort(prodList, records_per_row=records_per_row)
                 return(viewMenu())
             case "4":
-                insertionSort(prodList)
+                insertionSort(prodList, records_per_row=records_per_row)
                 return(viewMenu())
             case "5":
-                selectionSort()
+                selectionSort(records_per_row=records_per_row)
                 return(viewMenu())
             case "6":
-                performMergeSort()
+                performMergeSort(records_per_row=records_per_row)
                 return(viewMenu())
             case "7":
                 restockingMenu(restockingQ)

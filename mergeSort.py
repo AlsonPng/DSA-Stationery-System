@@ -1,4 +1,5 @@
 import sqlite3
+from displayRecords import displayRecords
 
 def mergeSort(stationary_list):
     if len(stationary_list) > 1:
@@ -33,9 +34,11 @@ def mergeSort(stationary_list):
             j += 1
             k += 1
 
-        print(f"Merging: {[item[0] for item in stationary_list]}")
+        dashStr = "-" * 30
+        prod_ids = "\n".join([f"Prod_id: {item[0]}" for item in stationary_list])
+        print(f"New List: \n{dashStr}\n{prod_ids}\n{dashStr}")
 
-def performMergeSort():
+def performMergeSort(records_per_row):
     connection = sqlite3.connect('product.db')
     c = connection.cursor()
     c.execute("SELECT * FROM products")
@@ -46,12 +49,11 @@ def performMergeSort():
         return
 
     mergeSort(prodList)
+    displayRecords(records_per_row)
 
     # Update the database with the sorted list
     c.execute("DELETE FROM products")
     c.executemany("INSERT INTO products VALUES (?, ?, ?, ?, ?, ?)", prodList)
     connection.commit()
     connection.close()
-
-    print("Products have been sorted by Category and Stock in ascending order.")
 
